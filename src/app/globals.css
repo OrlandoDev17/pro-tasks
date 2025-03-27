@@ -1,26 +1,46 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #222;
+  --color-accent: #0f5995;
+  --color-special: #128339;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* <script>
+  const toggleTheme = document.getElementById('toggle-theme');
+  const sun = document.getElementById('sun');
+  const moon = document.getElementById('moon');
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  // Funcion para actualizar los iconos segun el tema
+  function updateIcons() {
+    if (document.documentElement.classList.contains('dark')) {
+      sun?.classList.remove('hidden');
+      moon?.classList.add('hidden');
+    } else {
+      sun?.classList.add('hidden');
+      moon?.classList.remove('hidden');
+    }
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  // Alternar el tema al hacer click en el boton
+  toggleTheme?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem(
+      'theme',
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    );
+    updateIcons();
+  });
+
+  // Aplicar el tema guardado en localStorage al cargar la pagina
+  const savedTheme = localStorage.getItem('theme');
+  if (
+    savedTheme === 'dark' ||
+    (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.documentElement.classList.add('dark');
+  }
+  updateIcons();
+</script> */
