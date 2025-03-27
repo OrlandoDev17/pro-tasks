@@ -6,41 +6,9 @@
   --color-primary: #222;
   --color-accent: #0f5995;
   --color-special: #128339;
+
+  --color-dark-bg: #1a202c;
+  --color-dark-primary: #cbd5e0;
+  --color-dark-accent: #90bde9;
+  --color-dark-special: #b5fdcd;
 }
-
-/* <script>
-  const toggleTheme = document.getElementById('toggle-theme');
-  const sun = document.getElementById('sun');
-  const moon = document.getElementById('moon');
-
-  // Funcion para actualizar los iconos segun el tema
-  function updateIcons() {
-    if (document.documentElement.classList.contains('dark')) {
-      sun?.classList.remove('hidden');
-      moon?.classList.add('hidden');
-    } else {
-      sun?.classList.add('hidden');
-      moon?.classList.remove('hidden');
-    }
-  }
-
-  // Alternar el tema al hacer click en el boton
-  toggleTheme?.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem(
-      'theme',
-      document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-    );
-    updateIcons();
-  });
-
-  // Aplicar el tema guardado en localStorage al cargar la pagina
-  const savedTheme = localStorage.getItem('theme');
-  if (
-    savedTheme === 'dark' ||
-    (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark');
-  }
-  updateIcons();
-</script> */
