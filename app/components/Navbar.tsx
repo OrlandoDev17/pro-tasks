@@ -42,7 +42,7 @@ export default function Navbar() {
           />
           <img
             className="size-12 hidden dark:block"
-            src="./logo-dark.svg"
+            src="./logo-Dark.svg"
             alt="Logo de ProTasks"
           />
           <h2 className="text-4xl font-poppins font-semibold tracking-wide dark:text-dark-primary">

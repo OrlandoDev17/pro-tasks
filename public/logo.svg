@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 401 401">
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210.95 192.84">
   <defs>
     <style>
       .cls-1 {
@@ -15,10 +15,10 @@
   </defs>
   <g id="Capa_1-2" data-name="Capa 1">
     <g>
-      <rect class="cls-2" x=".5" y=".5" width="400" height="400" rx="15.14" ry="15.14"/>
-      <rect class="cls-1" x="26.07" y="41.59" width="109.77" height="317.82" rx="10.15" ry="10.15"/>
-      <rect class="cls-1" x="145.9" y="41.59" width="109.77" height="152.53" rx="9.55" ry="9.55"/>
-      <rect class="cls-1" x="265.16" y="41.59" width="109.77" height="255.4" rx="11.13" ry="11.13"/>
+      <rect class="cls-2" x=".5" y=".5" width="209.95" height="191.84" rx="15.14" ry="15.14"/>
+      <rect class="cls-1" x="15.94" y="20.5" width="56.53" height="154.69" rx="10.15" ry="10.15"/>
+      <rect class="cls-1" x="77.64" y="20.5" width="56.53" height="74.24" rx="9.55" ry="9.55"/>
+      <rect class="cls-1" x="139.06" y="20.5" width="56.53" height="124.31" rx="11.13" ry="11.13"/>
     </g>
   </g>
 </svg>
