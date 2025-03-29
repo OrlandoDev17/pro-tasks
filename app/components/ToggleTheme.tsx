@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Moon from '@/app/icons/Moon';
-import Sun from '@/app/icons/Sun';
+import Moon from '@/icons/Moon';
+import Sun from '@/icons/Sun';
 
 export default function ToggleTheme() {
   // Estado para controlar el tema actual

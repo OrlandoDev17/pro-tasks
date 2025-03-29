@@ -1,9 +1,9 @@
 import React from 'react';
 import SidebarLinks from './SidebarLinks';
-import Table from '@/app/icons/Table';
-import Template from '@/app/icons/Templates';
-import Users from '@/app/icons/Users';
-import Settings from '@/app/icons/Settings';
+import Table from '@/icons/Table';
+import Template from '@/icons/Templates';
+import Users from '@/icons/Users';
+import Settings from '@/icons/Settings';
 
 export default function Sidebar() {
   interface SidebarLink {
@@ -41,7 +41,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="inline-flex p-8 h-[819px] border-r-2  border-dark-bg dark:border-white">
+    <div className="inline-flex p-8 h-[819px] border-r-2  border-dark-bg dark:border-white">
       <ul className="flex flex-col gap-2">
         {SIDEBAR_LINKS.map(({ url, text, icon, id }) => (
           <li key={id}>
@@ -54,6 +54,6 @@ export default function Sidebar() {
           </li>
         ))}
       </ul>
-    </aside>
+    </div>
   );
 }

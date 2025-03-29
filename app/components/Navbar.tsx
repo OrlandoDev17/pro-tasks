@@ -1,7 +1,7 @@
 'use client';
 
 import Button from './Button';
-import Search from '@/app/icons/Search';
+import Search from '@/icons/Search';
 import ToggleTheme from './ToggleTheme';
 
 const NAVBAR_LINKS = [
@@ -30,9 +30,9 @@ const BUTTONS = [
   },
 ];
 
-export default function NavBar() {
+export default function Navbar() {
   return (
-    <header className="py-6 px-24 flex items-center border-b-2 border-dark-bg dark:border-white justify-between bg-dark-primary dark:bg-dark-bg">
+    <div className="py-6 px-24 flex items-center border-b-2 border-dark-bg dark:border-white justify-between bg-dark-primary dark:bg-dark-bg">
       <nav className="flex items-center gap-8">
         <a href="" className="flex items-center gap-2">
           <img
@@ -61,20 +61,22 @@ export default function NavBar() {
             </li>
           ))}
         </ul>
-        <Button color="accent" href="#">
-          Crear
-        </Button>
+        <Button href="#">Crear</Button>
       </nav>
 
       <aside className="flex items-center gap-4">
         <Search className="size-8 text-special cursor-pointer mr-2 dark:text-dark-special" />
         {BUTTONS.map(({ url, text, id }) => (
-          <Button color="special" key={id} className="" href={url}>
+          <Button
+            key={id}
+            className="border-special shadow-special hover:bg-special dark:border-dark-special dark:shadow-dark-special dark:hover:bg-dark-special"
+            href={url}
+          >
             {text}
           </Button>
         ))}
         <ToggleTheme />
       </aside>
-    </header>
+    </div>
   );
 }
