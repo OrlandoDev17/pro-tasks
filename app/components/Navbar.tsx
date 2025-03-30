@@ -4,31 +4,7 @@ import Button from './Button';
 import Search from '@/icons/Search';
 import ToggleTheme from './ToggleTheme';
 
-const NAVBAR_LINKS = [
-  {
-    id: 1,
-    url: '#',
-    text: 'Espacio de Trabajo',
-  },
-  {
-    id: 2,
-    url: '#',
-    text: 'Plantillas',
-  },
-];
-
-const BUTTONS = [
-  {
-    id: 1,
-    url: '#',
-    text: 'Iniciar Sesion',
-  },
-  {
-    id: 2,
-    url: '#',
-    text: 'Registrarse',
-  },
-];
+import { NAVBAR_LINKS, BUTTONS } from '@/consts/navbar';
 
 export default function Navbar() {
   return (
