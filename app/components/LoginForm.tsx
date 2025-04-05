@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { signInAndRedirect } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient'; // Usamos el cliente supabase
 
 import Mail from '@/icons/Mail';
 import Lock from '@/icons/Lock';
@@ -11,14 +12,25 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await signInAndRedirect(email, password);
-    } catch (err: any) {
-      setError(err.message);
+    setError(null);
+
+    // Lógica de login usando Supabase
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError('Correo o contraseña incorrectos');
+      return;
     }
+
+    // Redirige al home con un mensaje de éxito
+    router.push('/?success=login');
   };
 
   return (

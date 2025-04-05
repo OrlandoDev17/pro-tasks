@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { signUpAndRedirect } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient'; // Usamos el cliente supabase
 
 import User from '@/icons/User';
 import Mail from '@/icons/Mail';
 import Lock from '@/icons/Lock';
 import Button from './Button';
-import { p } from 'framer-motion/client';
 
 export default function RegisterForm() {
   const [name, setName] = useState('');
@@ -15,6 +15,7 @@ export default function RegisterForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,11 +25,22 @@ export default function RegisterForm() {
       return;
     }
 
-    try {
-      await signUpAndRedirect(name, email, password);
-    } catch (err: any) {
-      setError(err.message);
+    // Lógica de registro con Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name },
+      },
+    });
+
+    if (error) {
+      setError(error.message);
+      return;
     }
+
+    // Redirige al home con un mensaje de éxito
+    router.push('/?success=register');
   };
 
   return (
@@ -67,7 +79,7 @@ export default function RegisterForm() {
         <label className="relative flex flex-col gap-y-2">
           <span className="text-md font-semibold text-primary">Contraseña</span>
           <input
-            className="outline-0 bg-neutral-100 p-2 rounded-md focus:outline-accent  focus:outline-2 pl-10 placeholder:text-primary/50"
+            className="outline-0 bg-neutral-100 p-2 rounded-md focus:outline-accent focus:outline-2 pl-10 placeholder:text-primary/50"
             type="password"
             value={password}
             placeholder="*******"
@@ -82,7 +94,7 @@ export default function RegisterForm() {
             Confirmar Contraseña
           </span>
           <input
-            className="outline-0 bg-neutral-100 p-2 rounded-md focus:outline-accent  focus:outline-2 pl-10 placeholder:text-primary/50"
+            className="outline-0 bg-neutral-100 p-2 rounded-md focus:outline-accent focus:outline-2 pl-10 placeholder:text-primary/50"
             type="password"
             value={confirmPassword}
             placeholder="*******"

@@ -1,24 +1,61 @@
 'use client';
 
-import Button from './Button';
-import Search from '@/icons/Search';
-import ToggleTheme from './ToggleTheme';
-import User from '@/icons/User';
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { supabase } from '@/lib/supabaseClient';
+
+import Button from './Button';
+import ToggleTheme from './ToggleTheme';
+import Search from '@/icons/Search';
+import User from '@/icons/User';
 import { NAVBAR_LINKS, BUTTONS } from '@/consts/navbar';
-import Link from 'next/link';
 
 export default function Navbar() {
-  const session = useSession();
-  const supabaseClient = useSupabaseClient();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const [message, setMessage] = useState<string | null>(null); // Estado para el mensaje
+
+  // Verifica si hay una sesion activa
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error('Error al obtener la sesión:', error.message);
+      }
+      setIsLoggedIn(!!data.session);
+      console.log('Sesión activa:', data.session);
+    };
+
+    checkSession();
+
+    // También escucha los cambios en la sesión
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setIsLoggedIn(!!session);
+      }
+    );
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, []);
 
   const handleSignOut = async () => {
-    await supabaseClient.auth.signOut();
-    router.push('/'); // Redirige a la página principal después de cerrar sesión
+    await supabase.auth.signOut();
+    setMessage('Sesión cerrada correctamente');
+    router.push('/'); // Redirige a la página principal
   };
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 5000); // El mensaje desaparece después de 5 segundos
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   return (
     <div className="py-6 px-24 flex items-center border-b-2 border-dark-bg dark:border-white justify-between bg-dark-primary dark:bg-dark-bg">
@@ -54,20 +91,30 @@ export default function Navbar() {
       </nav>
 
       <aside className="flex items-center gap-4">
-        <Search className="size-8 text-special cursor-pointer mr-2 dark:text-dark-special" />
-        {session ? (
-          // Si el usuario está logueado, muestra el icono de usuario
+        <a
+          href="#"
+          className="border-2 border-special dark:border-dark-special text-special dark:text-dark-special rounded-full p-2 hover:bg-special dark:hover:bg-dark-special
+          transition hover:text-white dark:hover:text-primary"
+        >
+          <Search className="size-8 " />
+        </a>
+        {isLoggedIn ? (
           <div className="flex items-center gap-2">
-            <User className="size-8 text-accent cursor-pointer dark:text-dark-accent" />
+            <a
+              href="#"
+              className="border-2 border-special dark:border-dark-special text-special cursor-pointer dark:text-dark-special rounded-full p-2 hover:bg-special dark:hover:bg-dark-special
+              transition hover:text-white dark:hover:text-primary "
+            >
+              <User className="size-8 " />
+            </a>
             <button
               onClick={handleSignOut}
-              className="text-lg text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+              className="text-lg block text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
             >
               Cerrar Sesión
             </button>
           </div>
         ) : (
-          // Si el usuario no está logueado, muestra los botones de Iniciar Sesión y Registrarse
           BUTTONS.map(({ url, text, id }) => (
             <Button
               key={id}
@@ -80,6 +127,15 @@ export default function Navbar() {
         )}
         <ToggleTheme />
       </aside>
+
+      {/* Mostrar el mensaje de cierre de sesión si está disponible */}
+      {message && (
+        <div
+          className={`absolute top-24 left-[50%] p-3 mt-4 text-red-500 border-2 border-red-500 text-lg rounded-xl`}
+        >
+          {message}
+        </div>
+      )}
     </div>
   );
 }

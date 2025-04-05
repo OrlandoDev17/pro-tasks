@@ -41,7 +41,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="inline-flex p-8 h-[819px] border-r-2  border-dark-bg dark:border-white">
+    <div className="inline-flex p-8 h-[815px] border-r-2  border-dark-bg dark:border-white">
       <ul className="flex flex-col gap-2">
         {SIDEBAR_LINKS.map(({ url, text, icon, id }) => (
           <li key={id}>
