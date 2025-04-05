@@ -4,7 +4,6 @@
 import { redirect } from 'next/navigation';
 import { supabase } from './supabaseClient';
 
-// Función para manejar login y redirección
 export const signInAndRedirect = async (email: string, password: string) => {
   const { error } = await supabase.auth.signInWithPassword({
     email,
@@ -15,26 +14,23 @@ export const signInAndRedirect = async (email: string, password: string) => {
     throw new Error('Correo o contraseña incorrectos');
   }
 
-  // Redirige a la página principal si el login es exitoso
-  redirect('/');
+  redirect('/?success=login');
 };
 
-// Función para manejar registro y redirección
 export const signUpAndRedirect = async (
   name: string,
   email: string,
   password: string
 ) => {
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: { data: { name } }, // Guarda el nombre en el perfil del usuario
+    options: { data: { name } },
   });
 
   if (error) {
     throw new Error('No se pudo registrar. Intenta con otro correo.');
   }
 
-  // Redirige a la página principal después del registro
-  redirect('/');
+  redirect('/?success=register');
 };

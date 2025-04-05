@@ -15,25 +15,25 @@ export default function AuthView() {
       </div>
 
       <header className="flex flex-col gap-y-3 items-center">
-        <h2 className="text-5xl font-semibold font-poppins text-accent">
+        <h2 className="text-3xl md:text-5xl font-semibold font-poppins text-accent">
           Bienvenido a ProTasks
         </h2>
-        <p className="text-primary/80 text-lg font-poppins">
+        <p className="text-primary/80 text-base md:text-lg font-poppins">
           Organiza tus proyectos de manera eficiente
         </p>
       </header>
-      <main className="bg-white flex flex-col gap-8 p-8 shadow-2xl rounded-xl max-w-140">
+      <main className="bg-white flex flex-col gap-8 p-6 md:p-8 shadow-2xl rounded-xl max-w-[90%] md:max-w-140">
         <div className="relative flex justify-between bg-neutral-200 p-2 rounded-lg overflow-hidden">
           {/* Fondo animado del botón activo */}
           <motion.div
             layoutId="activeTab"
-            className="absolute top-1 flex bottom-0 h-10 w-48 bg-white rounded-md"
+            className="absolute top-1 flex bottom-0 h-11 md:h-10 w-38 md:w-48 bg-white rounded-md"
             animate={{ left: isLogin ? '2%' : '50%' }}
             transition={{ type: 'slide', stiffness: 300, damping: 20 }}
           />
 
           <motion.button
-            className={`relative z-10 px-12 py-1 rounded-md font-poppins transition-colors duration-300 ${
+            className={`relative text-sm md:text-base z-10 px-8 md:px-12 py-2 md:py-1 rounded-md font-poppins transition-colors duration-300 ${
               isLogin ? 'text-primary font-semibold' : 'text-gray-500'
             }`}
             onClick={() => setIsLogin(true)}
@@ -43,7 +43,7 @@ export default function AuthView() {
           </motion.button>
 
           <motion.button
-            className={`relative z-10 px-12 py-1 rounded-md font-poppins transition-colors duration-300 ${
+            className={`relative text-sm md:text-md z-10 px-8 md:px-12 py-2 md:py-1 rounded-md font-poppins transition-colors duration-300 ${
               !isLogin ? 'text-primary font-semibold' : 'text-gray-500'
             }`}
             onClick={() => setIsLogin(false)}

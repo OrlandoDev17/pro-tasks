@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Button from './components/Button';
 import Plus from './icons/Plus';
+import SuccessMessage from './components/SuccessMessage';
 
 export default function Home() {
   return (
@@ -18,6 +19,10 @@ export default function Home() {
             <h2 className="text-4xl font-poppins font-semibold dark:text-white">
               Mis Tableros
             </h2>
+            <SuccessMessage
+              loginSuccessMessage="¡Has iniciado sesión exitosamente!"
+              registerSuccessMessage="¡Tu cuenta ha sido creada correctamente! Bienvenido."
+            />
             <Button href="#crear-tablero">
               <Plus className="size-8" />
               <span className="ml-1">Crear Tablero</span>
