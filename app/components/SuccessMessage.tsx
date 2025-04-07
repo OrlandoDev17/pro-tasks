@@ -1,7 +1,9 @@
 'use client';
 
+import { div } from 'framer-motion/client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 
 interface Props {
   loginSuccessMessage?: string;
@@ -35,9 +37,15 @@ export default function SuccessMessage({
     return null;
   }
 
+  function loadingSuccessMessage() {
+    return <div>Cargando Mensaje...</div>;
+  }
+
   return (
-    <div className="border-special dark:border-dark-special border-2 text-lg text-special dark:text-dark-special font-semibold p-2 rounded-lg">
-      {message}
-    </div>
+    <Suspense fallback={loadingSuccessMessage()}>
+      <div className="border-special dark:border-dark-special border-2 text-lg text-special dark:text-dark-special font-semibold p-2 rounded-lg">
+        {message}
+      </div>
+    </Suspense>
   );
 }
