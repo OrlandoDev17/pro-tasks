@@ -11,6 +11,7 @@ import ToggleTheme from './ToggleTheme';
 import Search from '@/icons/Search';
 import User from '@/icons/User';
 import { NAVBAR_LINKS, BUTTONS } from '@/consts/navbar';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,12 +62,12 @@ export default function Navbar() {
     <div className="py-6 px-24 flex items-center border-b-2 border-dark-bg dark:border-white justify-between bg-dark-primary dark:bg-dark-bg">
       <nav className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2">
-          <img
+          <Image
             className="size-12 block dark:hidden"
             src="./logo.svg"
             alt="Logo de ProTasks"
           />
-          <img
+          <Image
             className="size-12 hidden dark:block"
             src="./logo-Dark.svg"
             alt="Logo de ProTasks"

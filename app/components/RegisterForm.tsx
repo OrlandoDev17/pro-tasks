@@ -26,7 +26,7 @@ export default function RegisterForm() {
     }
 
     // Lógica de registro con Supabase
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
